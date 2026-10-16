@@ -105,13 +105,4 @@ public class FrmOlvido extends JFrame {
         JOptionPane.showMessageDialog(this, mensaje, "Validación", JOptionPane.WARNING_MESSAGE);
         campo.requestFocusInWindow();
     }
-
-    /** Solo para probar la ventana de forma independiente. */
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            FrmOlvido frm = new FrmOlvido();
-            frm.setDefaultCloseOperation(EXIT_ON_CLOSE);
-            frm.setVisible(true);
-        });
-    }
 }
