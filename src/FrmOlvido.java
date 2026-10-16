@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.regex.Pattern;
 
@@ -10,10 +11,11 @@ public class FrmOlvido extends JFrame {
     private static final Pattern EMAIL_PATTERN =
             Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
 
-    private final JTextField txtUsuario = new JTextField(20);
-    private final JTextField txtCorreo = new JTextField(20);
-    private final JButton btnRecuperar = new JButton("Recuperar contraseña");
-    private final JButton btnCancelar = new JButton("Cancelar");
+    private final JTextField txtUsuario = new JTextField();
+    private final JTextField txtCorreo = new JTextField();
+    private final JLabel lblMensaje = new JLabel(" ");
+    private final JButton btnRecuperar = Estilo.boton("Recuperar", true);
+    private final JButton btnCancelar = Estilo.boton("Cancelar", false);
 
     private final UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
 
@@ -26,33 +28,42 @@ public class FrmOlvido extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE); // no termina el sistema principal
         setResizable(false);                        // Resizable = false
 
-        JLabel lblTitulo = new JLabel("Recuperación de contraseña", SwingConstants.CENTER);
-        lblTitulo.setFont(lblTitulo.getFont().deriveFont(Font.BOLD, 16f));
+        Estilo.campo(txtUsuario);
+        Estilo.campo(txtCorreo);
+        lblMensaje.setFont(Estilo.NORMAL);
+        lblMensaje.setForeground(Estilo.ERROR);
 
         JPanel form = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(6, 6, 6, 6);
-        gbc.anchor = GridBagConstraints.WEST;
+        form.setBackground(Estilo.FONDO);
+        form.setBorder(new EmptyBorder(22, 30, 20, 30));
+        GridBagConstraints g = new GridBagConstraints();
+        g.gridx = 0;
+        g.fill = GridBagConstraints.HORIZONTAL;
+        g.anchor = GridBagConstraints.WEST;
+        g.weightx = 1;
 
-        gbc.gridx = 0; gbc.gridy = 0;
-        form.add(new JLabel("Usuario:"), gbc);
-        gbc.gridx = 1;
-        form.add(txtUsuario, gbc);
+        g.gridy = 0; g.insets = new Insets(0, 0, 5, 0);
+        form.add(Estilo.etiqueta("Usuario"), g);
+        g.gridy = 1; g.insets = new Insets(0, 0, 14, 0);
+        form.add(txtUsuario, g);
+        g.gridy = 2; g.insets = new Insets(0, 0, 5, 0);
+        form.add(Estilo.etiqueta("Correo electrónico"), g);
+        g.gridy = 3; g.insets = new Insets(0, 0, 8, 0);
+        form.add(txtCorreo, g);
+        g.gridy = 4; g.insets = new Insets(0, 0, 14, 0);
+        form.add(lblMensaje, g);
 
-        gbc.gridx = 0; gbc.gridy = 1;
-        form.add(new JLabel("Correo electrónico:"), gbc);
-        gbc.gridx = 1;
-        form.add(txtCorreo, gbc);
-
-        JPanel botones = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        botones.add(btnRecuperar);
+        JPanel botones = new JPanel(new GridLayout(1, 2, 12, 0));
+        botones.setOpaque(false);
         botones.add(btnCancelar);
+        botones.add(btnRecuperar);
+        g.gridy = 5; g.insets = new Insets(0, 0, 0, 0);
+        form.add(botones, g);
 
-        JPanel contenido = new JPanel(new BorderLayout(10, 10));
-        contenido.setBorder(BorderFactory.createEmptyBorder(15, 20, 10, 20));
-        contenido.add(lblTitulo, BorderLayout.NORTH);
+        JPanel contenido = new JPanel(new BorderLayout());
+        contenido.add(Estilo.encabezado("Recuperar contraseña",
+                "Ingrese sus datos para restablecer el acceso"), BorderLayout.NORTH);
         contenido.add(form, BorderLayout.CENTER);
-        contenido.add(botones, BorderLayout.SOUTH);
         setContentPane(contenido);
 
         btnRecuperar.addActionListener(e -> recuperar());
@@ -78,31 +89,37 @@ public class FrmOlvido extends JFrame {
                     "Información", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         } else {
-            JOptionPane.showMessageDialog(this,
-                    "No se pudo procesar la solicitud.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
+            mostrarError("No se pudo procesar la solicitud.", null);
         }
     }
 
     /** Valida solo los campos del formulario (no consulta la base de datos). */
     private boolean validarCampos(String usuario, String correo) {
+        txtUsuario.setBorder(Estilo.bordeCampo(Estilo.BORDE));
+        txtCorreo.setBorder(Estilo.bordeCampo(Estilo.BORDE));
+
         if (usuario.isEmpty()) {
-            advertir("El campo Usuario es obligatorio y no puede contener solo espacios.", txtUsuario);
+            mostrarError("El usuario es obligatorio y no puede quedar en blanco.", txtUsuario);
             return false;
         }
         if (correo.isEmpty()) {
-            advertir("El campo Correo electrónico es obligatorio y no puede contener solo espacios.", txtCorreo);
+            mostrarError("El correo electrónico es obligatorio y no puede quedar en blanco.", txtCorreo);
             return false;
         }
         if (!EMAIL_PATTERN.matcher(correo).matches()) {
-            advertir("El formato del correo electrónico no es válido (ejemplo: nombre@dominio.com).", txtCorreo);
+            mostrarError("El correo no tiene un formato válido (ejemplo: nombre@dominio.com).", txtCorreo);
             return false;
         }
+        lblMensaje.setText(" ");
         return true;
     }
 
-    private void advertir(String mensaje, JComponent campo) {
-        JOptionPane.showMessageDialog(this, mensaje, "Validación", JOptionPane.WARNING_MESSAGE);
-        campo.requestFocusInWindow();
+    private void mostrarError(String mensaje, JTextField campo) {
+        lblMensaje.setText("<html><body style='width:250px'>" + mensaje + "</body></html>");
+        if (campo != null) {
+            campo.setBorder(Estilo.bordeCampo(Estilo.ERROR));
+            campo.requestFocusInWindow();
+        }
+        pack();
     }
 }

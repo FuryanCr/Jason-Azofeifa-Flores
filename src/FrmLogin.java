@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -8,49 +9,55 @@ import java.awt.event.MouseEvent;
  */
 public class FrmLogin extends JFrame {
 
-    private final JTextField txtUsuario = new JTextField(20);
-    private final JPasswordField txtClave = new JPasswordField(20);
-    private final JButton btnIngresar = new JButton("Ingresar");
-    private final JLabel lblOlvido = new JLabel("<html><u>¿Olvidó su contraseña?</u></html>");
+    private final JTextField txtUsuario = new JTextField();
+    private final JPasswordField txtClave = new JPasswordField();
+    private final JButton btnIngresar = Estilo.boton("Ingresar", true);
+    private final JLabel lblOlvido = new JLabel("¿Olvidó su contraseña?");
 
     public FrmLogin() {
         setTitle("Inicio de sesión");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
 
-        JLabel lblTitulo = new JLabel("Inicio de sesión", SwingConstants.CENTER);
-        lblTitulo.setFont(lblTitulo.getFont().deriveFont(Font.BOLD, 16f));
+        Estilo.campo(txtUsuario);
+        Estilo.campo(txtClave);
+        btnIngresar.setPreferredSize(new Dimension(280, 38));
 
-        JPanel form = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(6, 6, 6, 6);
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.gridx = 0; gbc.gridy = 0; form.add(new JLabel("Usuario:"), gbc);
-        gbc.gridx = 1; form.add(txtUsuario, gbc);
-        gbc.gridx = 0; gbc.gridy = 1; form.add(new JLabel("Contraseña:"), gbc);
-        gbc.gridx = 1; form.add(txtClave, gbc);
-
-        lblOlvido.setForeground(Color.BLUE);
+        lblOlvido.setFont(Estilo.NORMAL);
+        lblOlvido.setForeground(Estilo.PRIMARIO);
         lblOlvido.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         lblOlvido.addMouseListener(new MouseAdapter() {
-            @Override public void mouseClicked(MouseEvent e) {
-                new FrmOlvido().setVisible(true);
-            }
+            @Override public void mouseClicked(MouseEvent e) { new FrmOlvido().setVisible(true); }
+            @Override public void mouseEntered(MouseEvent e) { lblOlvido.setText("<html><u>¿Olvidó su contraseña?</u></html>"); }
+            @Override public void mouseExited(MouseEvent e) { lblOlvido.setText("¿Olvidó su contraseña?"); }
         });
 
-        JPanel sur = new JPanel(new GridLayout(2, 1, 0, 6));
-        JPanel fila1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        fila1.add(btnIngresar);
-        JPanel fila2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        fila2.add(lblOlvido);
-        sur.add(fila1);
-        sur.add(fila2);
+        JPanel form = new JPanel(new GridBagLayout());
+        form.setBackground(Estilo.FONDO);
+        form.setBorder(new EmptyBorder(22, 30, 20, 30));
+        GridBagConstraints g = new GridBagConstraints();
+        g.gridx = 0;
+        g.fill = GridBagConstraints.HORIZONTAL;
+        g.anchor = GridBagConstraints.WEST;
+        g.weightx = 1;
 
-        JPanel contenido = new JPanel(new BorderLayout(10, 10));
-        contenido.setBorder(BorderFactory.createEmptyBorder(15, 20, 10, 20));
-        contenido.add(lblTitulo, BorderLayout.NORTH);
+        g.gridy = 0; g.insets = new Insets(0, 0, 5, 0);
+        form.add(Estilo.etiqueta("Usuario"), g);
+        g.gridy = 1; g.insets = new Insets(0, 0, 14, 0);
+        form.add(txtUsuario, g);
+        g.gridy = 2; g.insets = new Insets(0, 0, 5, 0);
+        form.add(Estilo.etiqueta("Contraseña"), g);
+        g.gridy = 3; g.insets = new Insets(0, 0, 20, 0);
+        form.add(txtClave, g);
+        g.gridy = 4; g.insets = new Insets(0, 0, 14, 0);
+        form.add(btnIngresar, g);
+        g.gridy = 5; g.insets = new Insets(0, 0, 0, 0);
+        g.anchor = GridBagConstraints.CENTER; g.fill = GridBagConstraints.NONE;
+        form.add(lblOlvido, g);
+
+        JPanel contenido = new JPanel(new BorderLayout());
+        contenido.add(Estilo.encabezado("Bienvenido", "Inicie sesión para continuar"), BorderLayout.NORTH);
         contenido.add(form, BorderLayout.CENTER);
-        contenido.add(sur, BorderLayout.SOUTH);
         setContentPane(contenido);
 
         btnIngresar.addActionListener(e -> {
@@ -62,6 +69,7 @@ public class FrmLogin extends JFrame {
                 JOptionPane.showMessageDialog(this, "Demostración: el login real no es parte de esta práctica.");
             }
         });
+        getRootPane().setDefaultButton(btnIngresar);
 
         pack();
         setLocationRelativeTo(null);
