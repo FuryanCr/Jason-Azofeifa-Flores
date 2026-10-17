@@ -1,0 +1,29 @@
+PASS | FrmOlvido es un JFrame
+PASS | Aparece centrada en la pantalla
+PASS | Resizable = false
+PASS | Cierre = DISPOSE_ON_CLOSE
+PASS | Formulario vacío: marca los dos campos -> "Escriba su usuario." / "Escriba su correo electrónico."
+PASS | La ventana no cambia de tamaño al mostrar errores
+PASS | Con errores no se llama al DAO
+PASS | Usuario solo con espacios se rechaza -> Escriba su usuario.
+PASS | Correo solo con espacios se rechaza -> Escriba su correo electrónico.
+PASS | Correo con formato inválido "correo" -> El correo no tiene un formato válido.
+PASS | Correo con formato inválido "correo@" -> El correo no tiene un formato válido.
+PASS | Correo con formato inválido "@dominio.com" -> El correo no tiene un formato válido.
+PASS | Correo con formato inválido "a@b" -> El correo no tiene un formato válido.
+PASS | Correo con formato inválido "a b@c.com" -> El correo no tiene un formato válido.
+PASS | Correo con formato inválido "a@..b.com" -> El correo no tiene un formato válido.
+PASS | Correo con formato inválido "a@x..com" -> El correo no tiene un formato válido.
+PASS | Correo con formato inválido "a@-x.com" -> El correo no tiene un formato válido.
+PASS | La ventana sigue abierta y no se llamó al DAO
+PASS | El error se borra al corregir el campo
+PASS | Datos válidos: se llama al DAO una vez con usuario y correo
+PASS | Datos válidos: aparece la pantalla de confirmación
+PASS | Cerrar con la X cierra solo esta ventana (la JVM sigue viva)
+PASS | La tecla Esc cierra la ventana
+PASS | FrmLogin se muestra y no se puede redimensionar
+PASS | Login vacío -> Escriba su usuario.
+PASS | Login sin contraseña -> Escriba su contraseña.
+PASS | Pulsar el enlace varias veces abre una sola ventana FrmOlvido
+PASS | Al cerrar FrmOlvido el login principal sigue abierto
+TOTAL: 28/28 pruebas aprobadas

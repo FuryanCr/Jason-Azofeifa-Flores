@@ -1,10 +1,5 @@
-# Práctica 1 - Funcionalidad "Olvidó mi contraseña"
+# Prácticas evaluadas 1 y 2 — Recuperación de contraseña
 
-Java Swing + patrón DAO.
-
-- `src/FrmOlvido.java`: JFrame centrado, no redimensionable, cierre con DISPOSE, validación de campos y correo.
-- `src/UsuarioDAO.java`: interfaz con `recuperarContrasena(usuario, correo)`.
-- `src/UsuarioDAOImpl.java`: implementación (solo estructura).
-- `src/FrmLogin.java`, `src/Main.java` y `src/Estilo.java`: ventana principal y estilo visual compartido.
-
-Ejecutar: `java -jar Practica1.jar` (o compilar `javac src/*.java` y `java -cp . Main`).
+Java Swing + patrón DAO. Cada práctica tiene su código (`src/`), pruebas (`pruebas/`) y `.jar` listo para ejecutar
+dentro de `Entrega_Practicas_Jason_Azofeifa/`. El informe está en `Documento/`.
+`Entrega_Practicas_Jason_Azofeifa.zip` contiene lo mismo, empaquetado para entregar.

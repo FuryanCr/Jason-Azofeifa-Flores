@@ -1,0 +1,50 @@
+PASS | FrmOlvido es un JFrame
+PASS | Aparece centrada en la pantalla
+PASS | Resizable = false
+PASS | Cierre = DISPOSE_ON_CLOSE
+PASS | Formulario vacío: marca los tres campos a la vez
+PASS | Mensajes de campo vacío: "Escriba su correo electrónico." / "Escriba la nueva contraseña." / "Repita la contraseña."
+PASS | La ventana no cambia de tamaño al mostrar errores
+PASS | Correo solo con espacios se rechaza como vacío
+PASS | Correo con formato inválido "correo" -> El correo no tiene un formato válido.
+PASS | Correo con formato inválido "correo@" -> El correo no tiene un formato válido.
+PASS | Correo con formato inválido "@dominio.com" -> El correo no tiene un formato válido.
+PASS | Correo con formato inválido "a@b" -> El correo no tiene un formato válido.
+PASS | Correo con formato inválido "a b@c.com" -> El correo no tiene un formato válido.
+PASS | Correo con formato inválido "a@..b.com" -> El correo no tiene un formato válido.
+PASS | Correo con formato inválido "a@x..com" -> El correo no tiene un formato válido.
+PASS | Correo con formato inválido "a@-x.com" -> El correo no tiene un formato válido.
+PASS | Correo con formato inválido "..@x.com" -> El correo no tiene un formato válido.
+PASS | Contraseña de solo espacios -> La contraseña no puede ser solo espacios.
+PASS | Contraseña menor a 8 caracteres -> Use al menos 8 caracteres.
+PASS | Sin confirmación -> Repita la contraseña.
+PASS | Confirmación distinta -> Las contraseñas no coinciden.
+PASS | Con errores el hash guardado no cambia
+PASS | La ventana sigue abierta mientras hay errores
+PASS | El error de un campo se borra al corregirlo
+PASS | Medidor: "abc" nivel 1
+PASS | Medidor: "Demo1234" nivel 2
+PASS | Medidor: "MiClave#2026x" nivel 4
+PASS | Medidor: campo vacío nivel 0
+PASS | El ojito muestra la contraseña
+PASS | El ojito vuelve a ocultarla
+PASS | Correo inexistente -> No hay ninguna cuenta con ese correo.
+PASS | Flujo exitoso: aparece la pantalla de confirmación
+PASS | Flujo exitoso: la clave nueva entra y la anterior no
+INFO | Registro antes:   demo@correo.com;GJFr1rpfHt5dKYo0s4KUbQ==;VShZFQpklLQaS34vjr/b66j7z9n5m8chNBCh1v6AO7A=
+INFO | Registro después: demo@correo.com;V9GWIB6ZD/imtt2VnrfCaQ==;zOTRBvqIpX2GS7JCPIPYRA1qBnKU/M7IzVoOdHp+kNQ=
+PASS | El archivo no contiene la contraseña en texto plano
+PASS | El hash cambió
+PASS | Cerrar con la X cierra solo esta ventana (la JVM sigue viva)
+PASS | La tecla Esc cierra la ventana
+PASS | FrmLogin se muestra centrada y sin redimensionar
+PASS | Login vacío -> Escriba su correo electrónico.
+PASS | Login sin contraseña -> Escriba su contraseña.
+PASS | Login con contraseña incorrecta -> Correo o contraseña incorrectos.
+PASS | Login con la cuenta demo entra -> Acceso correcto. Sesión iniciada.
+PASS | Recorrido completo: el cambio desde FrmOlvido se aplica
+PASS | Recorrido completo: la contraseña vieja ya no entra
+PASS | Recorrido completo: la contraseña nueva entra -> Acceso correcto. Sesión iniciada.
+PASS | Pulsar el enlace varias veces abre una sola ventana FrmOlvido
+PASS | Al cerrar FrmOlvido el login principal sigue abierto
+TOTAL: 47/47 pruebas aprobadas

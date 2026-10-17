@@ -1,0 +1,61 @@
+PASS | Correo válido aceptado: a@b.co
+PASS | Correo válido aceptado: nombre.apellido@dominio.com
+PASS | Correo válido aceptado: x_y+z@sub.dominio.cr
+PASS | Correo válido aceptado: A1@mail-2.org
+PASS | Correo inválido rechazado: "correo"
+PASS | Correo inválido rechazado: "correo@"
+PASS | Correo inválido rechazado: "@dominio.com"
+PASS | Correo inválido rechazado: "a@b"
+PASS | Correo inválido rechazado: "a b@c.com"
+PASS | Correo inválido rechazado: "a@b.."
+PASS | Correo inválido rechazado: "a@b.c"
+PASS | Correo inválido rechazado: "a@..b.com"
+PASS | Correo inválido rechazado: "a@x..com"
+PASS | Correo inválido rechazado: "a@-x.com"
+PASS | Correo inválido rechazado: "a@x-.com"
+PASS | Correo inválido rechazado: "..@x.com"
+PASS | Correo inválido rechazado: "a..b@x.com"
+PASS | Correo inválido rechazado: ".a@x.com"
+PASS | Correo inválido rechazado: "a.@x.com"
+PASS | Correo inválido rechazado: ""
+PASS | Correo inválido rechazado: "a@b.com."
+PASS | Correo null rechazado
+PASS | Correo de más de 254 caracteres rechazado
+PASS | estaVacio: null, vacío y solo espacios
+PASS | estaVacio: texto con contenido
+PASS | Fuerza de vacío = 0
+PASS | Fuerza de contraseña corta = 1
+PASS | Fuerza de Demo1234 = 2
+PASS | Fuerza de MiClave2026x = 3
+PASS | Fuerza de MiClave#2026x = 4
+PASS | Salt de 16 bytes
+PASS | Hash de 32 bytes (SHA-256)
+PASS | Hash == SHA-256(salt + contraseña) calculado aparte
+PASS | Mismo salt y contraseña dan el mismo hash
+PASS | Otro salt cambia el hash
+PASS | coincide() acepta la correcta
+PASS | coincide() rechaza la incorrecta
+PASS | 2000 salts generados, todos distintos
+PASS | Se crea el archivo con la cuenta demo
+PASS | Cuenta demo entra con Demo1234
+PASS | recuperarContrasena devuelve true si el correo existe
+INFO | Registro antes:   demo@correo.com;gZ7AJVn/1kmKJ+n5vrAW5Q==;XTuPtmft7jIvrhq68LRd3NnF3pkPS0gnQDv4PlaPkzE=
+INFO | Registro después: demo@correo.com;o0p1eIcZ5B4JUDM1b/ZwXg==;Cl9+/Dwpd3AvaUpOx2hhv7AyKHelLjJEhrG8Qf6kIVI=
+PASS | Formato correo;salt;hash
+PASS | El archivo no contiene la contraseña en texto plano
+PASS | Salt nuevo en cada cambio
+PASS | Hash distinto tras el cambio
+PASS | Clave nueva entra
+PASS | Clave anterior ya no entra
+PASS | No queda archivo temporal tras guardar
+PASS | Correo se compara sin importar mayúsculas ni espacios
+PASS | Correo inexistente devuelve false
+PASS | Correo null devuelve false
+PASS | Contraseña null devuelve false
+PASS | Contraseña en blanco devuelve false y no cambia nada
+PASS | verificarContrasena con null devuelve false
+PASS | Contraseña con tildes y símbolos
+PASS | Con varios usuarios solo cambia el solicitado
+PASS | Archivo con líneas dañadas: no lanza error y devuelve false
+PASS | 40 cambios simultáneos: el archivo queda con 1 línea íntegra
+TOTAL: 58/58 pruebas aprobadas
