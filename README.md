@@ -1,5 +1,8 @@
 # Prácticas evaluadas 1 y 2 — Recuperación de contraseña
 
-Java Swing + patrón DAO. Cada práctica tiene su código (`src/`), pruebas (`pruebas/`) y `.jar` listo para ejecutar
-dentro de `Entrega_Practicas_Jason_Azofeifa/`. El informe está en `Documento/`.
-`Entrega_Practicas_Jason_Azofeifa.zip` contiene lo mismo, empaquetado para entregar.
+Proyectos de NetBeans (Java Swing, patrón DAO).
+
+- `Practica1/`: ventana "Olvidó mi contraseña" y método en la capa DAO.
+- `Practica2/`: recuperación con SHA-256 + salt aleatorio.
+- `entregables/`: un ZIP por práctica, listos para entregar.
+- `pruebas/`: pruebas automáticas (ver `LEEME.txt` de cada práctica para ejecutar los proyectos).

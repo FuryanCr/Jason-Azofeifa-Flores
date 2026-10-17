@@ -1,0 +1,19 @@
+PRÁCTICA 1 - Ventana "Olvidó mi contraseña"
+
+ABRIR EN NETBEANS
+  Archivo > Abrir proyecto... > seleccionar la carpeta "Practica1" > Abrir.
+  Luego clic derecho sobre el proyecto > Run (o F6).
+  Si NetBeans lo pide, aceptar que genere los archivos de compilación.
+
+EJECUTAR SIN NETBEANS
+  Windows: doble clic en ejecutar.bat      Mac/Linux: ./ejecutar.sh
+  (o: java -jar dist/Practica1.jar)   Requiere Java 11 o superior.
+
+ESTRUCTURA (src)
+  formularios/FrmOlvido      JFrame centrado, no redimensionable, cierre DISPOSE_ON_CLOSE
+  formularios/FrmLogin       ventana desde la que se abre FrmOlvido
+  interfaces/IAutenticacion  declara recuperarContrasena(usuario, correo)
+  dao/UsuarioDAO             implementa IAutenticacion (solo la estructura, sin BD)
+  clases/ClsValidador        campos vacíos / solo espacios / formato de correo
+  componentes/               piezas visuales de los formularios
+  principal/Main             clase que inicia el programa

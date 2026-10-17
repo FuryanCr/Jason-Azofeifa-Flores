@@ -1,0 +1,26 @@
+PRÁCTICA 2 - Recuperación de contraseña con SHA-256 + salt
+
+ABRIR EN NETBEANS
+  Archivo > Abrir proyecto... > seleccionar la carpeta "Practica2" > Abrir.
+  Luego clic derecho sobre el proyecto > Run (o F6).
+  Si NetBeans lo pide, aceptar que genere los archivos de compilación.
+
+EJECUTAR SIN NETBEANS
+  Windows: doble clic en ejecutar.bat      Mac/Linux: ./ejecutar.sh
+  (o: java -jar dist/Practica2.jar)   Requiere Java 11 o superior.
+
+CUENTA DE PRUEBA:  demo@correo.com  /  Demo1234
+  Los usuarios se guardan en usuarios.txt, que se crea solo en la carpeta del proyecto
+  como  correo;salt;hash  (la contraseña nunca queda en texto plano).
+  Para volver al estado inicial basta borrar usuarios.txt.
+
+ESTRUCTURA (src)
+  interfaces/IAutenticacion  declara recuperarContrasena(correo, nuevaContrasena)
+  dao/UsuarioDAO             implementa IAutenticacion: busca el correo, genera un salt
+                             aleatorio, calcula SHA-256(salt + contraseña) y lo guarda
+  clases/ClsSeguridad        salt (SecureRandom, 16 bytes) y hash SHA-256
+  clases/ClsValidador        validación de correo y fuerza de la contraseña
+  formularios/FrmOlvido      correo, nueva contraseña y confirmación, con validaciones
+  formularios/FrmLogin       inicio de sesión conectado al DAO
+  componentes/               piezas visuales de los formularios
+  principal/Main             clase que inicia el programa
